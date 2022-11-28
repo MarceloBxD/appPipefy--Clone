@@ -12,25 +12,20 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverBody,
+  InputLeftAddon,
   Box,
   PopoverArrow,
   PopoverCloseButton,
+  InputGroup,
+  Button,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { PositionCards } from "../PositionCards/index";
+import { useApp } from "../../contexts/contextApi";
 
 export const DataUser = () => {
-  const [isFilled, setIsFilled] = useState<boolean>(false);
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [isSelected, setIsSelected] = useState<boolean>(false)
 
-  const availablePositions = [
-    { "id": 1, Name: "Dev. Front End Jr.", vacancies: 120, "selected": isSelected} ,
-    { "id": 2, Name: "Dev. Front End Sr.", vacancies: 340, "selected": isSelected},
-    { "id": 3, Name: "Dev. FullStack End Jr.", vacancies: 230, "selected": isSelected},
-    { "id": 4, Name: "Software Engeneer Jr.", vacancies: 30, "selected": isSelected},
-  ];
+  const { positionSelected, setPositionSelected, availablePositions, isFilled, setIsFilled, name, setName, email, setEmail }: any = useApp()  
 
   useEffect(() => {
     checkIsFilled();
@@ -53,6 +48,7 @@ export const DataUser = () => {
       h="520px"
       borderRadius="7px"
       bgColor="#FFF"
+      overflowY="scroll"
     >
       <FormControl>
         <FormLabel color={name ? "" : "#F00"}> *Nome Completo</FormLabel>
@@ -97,7 +93,7 @@ export const DataUser = () => {
       </FormControl>
       <FormControl>
         <FormLabel>*Cargo Desejado</FormLabel>
-        <Popover>
+        <Popover placement="right-end">
           <PopoverTrigger>
             <Box
               role="button"
@@ -105,24 +101,45 @@ export const DataUser = () => {
               textAlign="center"
               w="110px"
               p="5px"
+              _hover={{ textDecoration: "underlined", color: "blue.300" }}
               borderRadius="8px"
               textDecor="underline"
               color="#666"
               children="Create Record"
             />
           </PopoverTrigger>
-          <PopoverContent bg="#666" color="white">
+          {positionSelected}
+          <PopoverContent color="#666">
             <PopoverHeader fontWeight="semibold">
               Cargos Disponíveis
             </PopoverHeader>
-            <PopoverArrow bg="pink" />
-            <PopoverCloseButton bg="purple" />
-            <PopoverBody>
-              {availablePositions.map((position) => (
-                <Flex onClick={() => setIsSelected(!isSelected)} m='10px'> 
-                    <PositionCards id={position.id} selected={position.selected} name={position.Name} vacancies={position.vacancies}></PositionCards>
+            <PopoverArrow bg="#333" />
+            <PopoverCloseButton bg="#FFF" _hover={{bgColor: "#888"}} color="#333" />
+            <PopoverBody h="300px" overflowY="scroll">
+              <Input w="100%" placeholder="Procurar conteúdo" />
+              {availablePositions.map((position: any, index: number) => (
+                <Flex key={index} m="12px">
+                  <PositionCards
+                    value={position.id}
+                    selected={position.selected}
+                    name={position.Name}
+                    vacancies={position.vacancies}
+                  ></PositionCards>
                 </Flex>
               ))}
+              <Button
+                w="100%"
+                _hover={{
+                  color: "#FFF",
+                  bgColor: "#333",
+                  border: "2px solid #888",
+                  transition: "all 1 ease",
+                }}
+                bgColor="#FFF"
+                color="#333"
+              >
+                Adicionar
+              </Button>
             </PopoverBody>
           </PopoverContent>
         </Popover>
@@ -135,6 +152,30 @@ export const DataUser = () => {
             <Radio value="Nao">Não</Radio>
           </HStack>
         </RadioGroup>
+      </FormControl>
+      <FormControl>
+        <FormLabel>*Candidato à PCD?</FormLabel>
+        <RadioGroup defaultValue="Nao">
+          <HStack spacing="24px">
+            <Radio value="Sim">Sim</Radio>
+            <Radio value="Nao">Não</Radio>
+          </HStack>
+        </RadioGroup>
+      </FormControl>
+      <FormControl>
+        <FormLabel>Se sim, qual o CID?</FormLabel>
+        <Input placeholder="CID" />
+      </FormControl>
+      <FormControl>
+        <FormLabel>Telefone</FormLabel>
+        <InputGroup>
+          <InputLeftAddon children="+234" />
+          <Input type="tel" placeholder="+55 (21) 99491-9288" />
+        </InputGroup>
+      </FormControl>
+      <FormControl>
+        <FormLabel>Anexe seu currículo</FormLabel>
+        <Input border="none" type="file" />
       </FormControl>
     </Flex>
   );
