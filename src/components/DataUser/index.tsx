@@ -18,6 +18,7 @@ import {
   PopoverCloseButton,
   InputGroup,
   Button,
+  Textarea,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { PositionCards } from "../PositionCards/index";
@@ -25,7 +26,21 @@ import { useApp } from "../../contexts/contextApi";
 
 export const DataUser = () => {
 
-  const { positionSelected, setPositionSelected, availablePositions, isFilled, setIsFilled, name, setName, email, setEmail }: any = useApp()  
+
+  const {
+    positionSelected,
+    setPositionSelected,
+    availablePositions,
+    isFilled,
+    setIsFilled,
+    name,
+    setName,
+    email,
+    setEmail,
+    textAreaInput,
+    setTextAreaInput,
+    professionSelected
+  }: any = useApp();
 
   useEffect(() => {
     checkIsFilled();
@@ -38,6 +53,7 @@ export const DataUser = () => {
       setIsFilled(true);
     }
   };
+
 
   return (
     <Flex
@@ -108,20 +124,22 @@ export const DataUser = () => {
               children="Create Record"
             />
           </PopoverTrigger>
-          {positionSelected}
           <PopoverContent color="#666">
             <PopoverHeader fontWeight="semibold">
               Cargos Disponíveis
             </PopoverHeader>
             <PopoverArrow bg="#333" />
-            <PopoverCloseButton bg="#FFF" _hover={{bgColor: "#888"}} color="#333" />
+            <PopoverCloseButton
+              bg="#FFF"
+              _hover={{ bgColor: "#888" }}
+              color="#333"
+            />
             <PopoverBody h="300px" overflowY="scroll">
               <Input w="100%" placeholder="Procurar conteúdo" />
               {availablePositions.map((position: any, index: number) => (
                 <Flex key={index} m="12px">
                   <PositionCards
                     value={position.id}
-                    selected={position.selected}
                     name={position.Name}
                     vacancies={position.vacancies}
                   ></PositionCards>
@@ -130,13 +148,13 @@ export const DataUser = () => {
               <Button
                 w="100%"
                 _hover={{
-                  color: "#FFF",
-                  bgColor: "#333",
+                  color: "#333",
+                  bgColor: "#FFF",
                   border: "2px solid #888",
                   transition: "all 1 ease",
                 }}
-                bgColor="#FFF"
-                color="#333"
+                bgColor="#333"
+                color="#FFF"
               >
                 Adicionar
               </Button>
@@ -176,6 +194,10 @@ export const DataUser = () => {
       <FormControl>
         <FormLabel>Anexe seu currículo</FormLabel>
         <Input border="none" type="file" />
+      </FormControl>
+      <FormControl>
+      <FormLabel>*Por que se interessou nessa vaga?</FormLabel>
+        <Textarea resize='none' onChange={e => setTextAreaInput(e.target.value)} placeholder='Motivo pelo qual se interessou pela vaga...'></Textarea>
       </FormControl>
     </Flex>
   );

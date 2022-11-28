@@ -4,29 +4,31 @@ const AppContext = createContext({})
 
 export function AppProvider({ children }: any) {
 
+const professionSelected = useRef();
+
     const availablePositions = [
-        { "id": 1, "Name": "Dev. Front End Jr", "vacancies": 120, "selected": false },
-        { "id": 2, "Name": "Dev. Front End Sr", "vacancies": 340, "selected": false },
+        { "id": 1, "Name": "Dev. Front End Jr", "vacancies": 120 },
+        { "id": 2, "Name": "Dev. Front End Sr", "vacancies": 340 },
         {
           "id": 3,
-          "Name": "Dev. Fullstack End Jr",
-          "vacancies": 230,
-          "selected": false,
+          "Name": "Dev. Fullstack Jr",
+          "vacancies": 230
         },
         {
           "id": 4,
           "Name": "Software Engeneer Jr",
-          "vacancies": 30,
-          "selected": false,
+          "vacancies": 30
         },
-        { "id": 5, "Name": "Engeneer Jr", "vacancies": 780, "selected": false },
-        { "id": 6, "Name": "Desing UX|UI", "vacancies": 30, "selected": false },
+        { "id": 5, "Name": "Engeneer Jr", "vacancies": 780},
+        { "id": 6, "Name": "Desing UX|UI", "vacancies": 30},
       ];
 
     const [positionSelected, setPositionSelected] = useState<any>(undefined);
     const [isFilled, setIsFilled] = useState<boolean>(false);
     const [name, setName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
+    const [textAreaInput, setTextAreaInput] = useState<string>("")
+    const [vulCode, setVulCode] = useState<string>("")
 
 
     const value = {
@@ -39,6 +41,11 @@ export function AppProvider({ children }: any) {
     email,
     setEmail,
     setPositionSelected,
+    textAreaInput,
+    setTextAreaInput,
+    vulCode,
+    setVulCode,
+    professionSelected
     }
 
     return (
