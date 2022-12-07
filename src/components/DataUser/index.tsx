@@ -25,8 +25,6 @@ import { PositionCards } from "../PositionCards/index";
 import { useApp } from "../../contexts/contextApi";
 
 export const DataUser = () => {
-
-
   const {
     positionSelected,
     setPositionSelected,
@@ -39,7 +37,7 @@ export const DataUser = () => {
     setEmail,
     textAreaInput,
     setTextAreaInput,
-    professionSelected
+    professionSelected,
   }: any = useApp();
 
   useEffect(() => {
@@ -54,14 +52,17 @@ export const DataUser = () => {
     }
   };
 
-
   return (
     <Flex
       p="20px"
       gap="20px"
       flexDir="column"
-      w="500px"
-      h="520px"
+      w={{
+        lg: "50%",
+        md: "50%",
+        sm: "60%",
+      }}
+      h="80%"
       borderRadius="7px"
       bgColor="#FFF"
       overflowY="scroll"
@@ -196,8 +197,12 @@ export const DataUser = () => {
         <Input border="none" type="file" />
       </FormControl>
       <FormControl>
-      <FormLabel>*Por que se interessou nessa vaga?</FormLabel>
-        <Textarea resize='none' onChange={e => setTextAreaInput(e.target.value)} placeholder='Motivo pelo qual se interessou pela vaga...'></Textarea>
+        <FormLabel>*Por que se interessou nessa vaga?</FormLabel>
+        <Textarea
+          resize="none"
+          onChange={(e) => setTextAreaInput(e.target.value)}
+          placeholder="Motivo pelo qual se interessou pela vaga..."
+        ></Textarea>
       </FormControl>
     </Flex>
   );

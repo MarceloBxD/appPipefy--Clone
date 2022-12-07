@@ -8,8 +8,12 @@ interface iPositionCards {
 }
 
 export const PositionCards = ({ value, name, vacancies }: iPositionCards) => {
-  const { positionSelected, professionSelected, setPositionSelected, availablePositions }: any =
-    useApp();
+  const {
+    positionSelected,
+    professionSelected,
+    setPositionSelected,
+    availablePositions,
+  }: any = useApp();
 
   return (
     <Flex
@@ -17,16 +21,19 @@ export const PositionCards = ({ value, name, vacancies }: iPositionCards) => {
       align="center"
       cursor="pointer"
       justify="center"
-      _hover={{ transform: "scale(1.1)", transition: "all 1s ease" }}
+      _hover={{
+        transform: "scale(1.1)",
+        transition: "all 1s ease",
+        color: "#fff",
+      }}
       p="5px"
       fontWeight="400"
-      border="1px solid #333"
       borderRadius="3px"
       h="60px"
       w="200px"
     >
       <Button
-        h='100%'
+        h="100%"
         ref={professionSelected}
         value={value}
         onClick={(e) => setPositionSelected(e.target?.value)}
@@ -38,7 +45,8 @@ export const PositionCards = ({ value, name, vacancies }: iPositionCards) => {
         type="submit"
       >
         <Flex flexDir="column">
-          <Text fontWeight='bold'>{name}</Text>
+          <Text fontWeight="bold">{name}</Text>
+          <Text fontSize="13px">{vacancies} vagas</Text>
         </Flex>
       </Button>
     </Flex>

@@ -4,21 +4,43 @@ import astrounaut from "../../assets/images/astronaut.jpg";
 export const DataCompany = () => {
   return (
     <Flex
-      bgColor="#FFF"
+      bgColor="#fff"
+      align="center"
+      justify="center"
+      h="80%"
       flexDir="column"
       w="300px"
-      h="450px"
       borderRadius="10px"
     >
-      <Flex  flex="1">
-        <Img pt='20px' w="300px" backgroundPosition='center' h='200px' objectFit='cover' src={astrounaut} />
-      </Flex>
-      <Flex flex="1">
-        <Text p='10px' textAlign='justify' fontSize='16px'>
-          <b>Vamos pra cima - M3</b>. Estamos felizes por você querer fazer parte da
-          equipe. Preencha nosso formulário de cadastro, selecionando a vaga em
-          que deseja se inscrever. Em breve entraremos em contato para te fornecer
-          próximos passos.
+      <Flex w="80%" h="80%" flexDir="column">
+        <Img
+          borderRadius="10px"
+          w="100%"
+          h="50%"
+          backgroundPosition="center"
+          objectFit="cover"
+          src={astrounaut}
+        />
+        <Text fontWeight="bold" align="center">
+          Vamos para cima D3
+        </Text>
+        <Text
+          display="flex"
+          flexDir="column"
+          justifyContent="center"
+          align="center"
+          mt="20px"
+          textAlign="justify"
+          fontSize={{
+            xl: "16px",
+            md: "14px",
+            base: "12px",
+          }}
+        >
+          Estamos felizes por você querer fazer parte da equipe. Preencha nosso
+          formulário de cadastro, selecionando a vaga em que deseja se
+          inscrever. Em breve entraremos em contato para te fornecer próximos
+          passos.
         </Text>
       </Flex>
     </Flex>
